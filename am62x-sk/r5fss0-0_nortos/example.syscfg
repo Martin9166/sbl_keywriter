@@ -1,0 +1,52 @@
+/**
+ * These arguments were used when this file was generated. They will be automatically applied on subsequent loads
+ * via the GUI or CLI. Run CLI with '--help' for additional information on how to override these arguments.
+ * @cliArgs --device "AM62x" --part "Default" --package "ALW" --context "r5fss0-0" --product "MCU_PLUS_SDK_AM62X@11.01.00"
+ * @v2CliArgs --device "AM625" --package "FCBGA (ALW)" --variant "AM6254-G" --context "r5fss0-0" --product "MCU_PLUS_SDK_AM62X@11.01.00"
+ * @versions {"tool":"1.24.1+4189"}
+ */
+
+/**
+ * Import the modules used in this configuration.
+ */
+const i2c       = scripting.addModule("/drivers/i2c/i2c", {}, false);
+const i2c1      = i2c.addInstance();
+const uart      = scripting.addModule("/drivers/uart/uart", {}, false);
+const uart1     = uart.addInstance();
+const clock     = scripting.addModule("/kernel/dpl/clock");
+const debug_log = scripting.addModule("/kernel/dpl/debug_log");
+
+/**
+ * Write custom configuration values to the imported modules.
+ */
+i2c1.$name                      = "CONFIG_I2C0";
+i2c1.useWakeupDomainPeripherals = false;
+i2c1.I2C_child.$name            = "drivers_i2c_v0_i2c_v0_template0";
+i2c1.I2C.$assign                = "I2C1";
+
+uart1.$name                      = "CONFIG_UART1";
+uart1.useWakeupDomainPeripherals = false;
+uart1.intrEnable                 = "DISABLE";
+uart1.UART.$assign               = "USART1";
+
+clock.instance = "TIMER1";
+
+debug_log.enableUartLog                      = true;
+debug_log.enableLogZoneInfo                  = true;
+debug_log.enableCssLog                       = false;
+debug_log.uartLog.$name                      = "CONFIG_UART0";
+debug_log.uartLog.useWakeupDomainPeripherals = false;
+debug_log.uartLog.intrEnable                 = "DISABLE";
+debug_log.uartLog.UART.$assign               = "USART0";
+
+/**
+ * Pinmux solution for unlocked pins/peripherals. This ensures that minor changes to the automatic solver in a future
+ * version of the tool will not impact the pinmux you originally saw.  These lines can be completely deleted in order to
+ * re-solve from scratch.
+ */
+i2c1.I2C.SCL.$suggestSolution               = "I2C1_SCL";
+i2c1.I2C.SDA.$suggestSolution               = "I2C1_SDA";
+uart1.UART.RXD.$suggestSolution             = "MCASP0_AFSR";
+uart1.UART.TXD.$suggestSolution             = "MCASP0_ACLKR";
+debug_log.uartLog.UART.RXD.$suggestSolution = "UART0_RXD";
+debug_log.uartLog.UART.TXD.$suggestSolution = "UART0_TXD";

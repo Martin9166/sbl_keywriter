@@ -1,0 +1,29 @@
+[ req ]
+distinguished_name = req_distinguished_name
+x509_extensions = v3_ca
+prompt = no
+dirstring_type = nobmp
+
+# This information will be filled by the end user.
+# The current data is only a place holder.
+# System firmware does not make decisions based
+# on the contents of this distinguished name block.
+[ req_distinguished_name ]
+C = oR
+ST = rx
+L = gQE843yQV0sag
+O = dqhGYAQ2Y4gFfCq0t1yABCYxex9eAxt71f
+OU = a87RB35W
+CN = x0FSqGTPWbGpuiV
+emailAddress = kFp5uGcgWXxcfxi@vsHs9C9qQWGrBs.com
+
+[ v3_ca ]
+basicConstraints = CA:true
+subjectKeyIdentifier = none
+1.3.6.1.4.1.294.1.34  = ASN1:SEQUENCE:image_integrity
+
+[ image_integrity ]
+# Replace SEC-CERT-SHA512 with second certificate SHA512 Hash value
+shaType      =  OID:2.16.840.1.101.3.4.2.3
+shaValue     =  FORMAT:HEX,OCT:afac41ecaba66c847d2d3ced2ff5ac11e2f6919db7658cfa157c5f2b22ae6693c716442f9704d5bda01dc7c1d2f7452873053835f5e3100ba52733648ffd9a67
+imageSize 	 =  INTEGER:5413
